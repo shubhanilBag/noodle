@@ -17,5 +17,8 @@
 const Route = use('Route')
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON2' }
+  return { greeting: 'Hello noodle connoisseur!' }
 })
+
+Route.get('/noodles/store/:name', 'NoodleController.store')
+Route.get('/noodles', 'NoodleController.index')
