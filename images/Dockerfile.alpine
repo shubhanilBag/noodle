@@ -1,13 +1,20 @@
 FROM alpine:3.10
 
-RUN apk update \
+ARG UNAME=noodle
+ARG UID=1000
+ARG GID=1000
+RUN addgroup -g $GID $UNAME \
+    && adduser -u $UID -G $UNAME -s /bin/sh -D $UNAME \
+    && apk update \
     && apk add --update nodejs \
     && apk add --update npm \
     && apk add bash \
     && apk add --update coreutils \
-    && mkdir /app
+    && mkdir /app && chown $UNAME:$UNAME /app
 
 WORKDIR /app
+
+USER $UNAME
 
 COPY ./package.json .
 RUN npm install
