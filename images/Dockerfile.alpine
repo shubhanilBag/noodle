@@ -1,0 +1,19 @@
+FROM alpine:3.10
+
+RUN apk update \
+    && apk add --update nodejs \
+    && apk add --update npm \
+    && apk add bash \
+    && apk add --update coreutils \
+    && mkdir /app
+
+WORKDIR /app
+
+COPY ./package.json .
+RUN npm install
+
+COPY . .
+RUN touch .env
+
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["node", "/app/server.js"]
