@@ -44,7 +44,7 @@ spec:
       requests:
         memory: 300Mi
   imagePullSecrets:
-  - name: gcr-key
+  - name: gcr-json-key
   securityContext:
     runAsUser: 1000
     fsGroup: 1000
